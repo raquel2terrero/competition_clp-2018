@@ -7,7 +7,8 @@ Xtrain_enf = Xtrain(Lab_Xtrain==1,:);
 % numero de observaciones y caracteristicas
 [N, d] = size(Xtrain);
 % nombres de caracteristicas
-nom_caract = {'Age', 'Female', 'TB', 'DB', 'Alkphos', 'Sgpt', 'Sgot', 'TP', 'ALB', 'A/R'};
+nom_caract = {'Age', 'Female', 'TB', 'DB', 'Alkphos', 'Sgpt', 'Sgot', ...
+              'TP', 'ALB', 'A/R'};
 
 %% HISTOGRAMAS GAUSSIANA
 figure('name','Histograms')  
@@ -59,21 +60,6 @@ for i_feat=1:d
     title(nom_caract{i_feat})
 end
 
-%% SCATTER PLOT
-figure('name','Scatter Plot')
-gplotmatrix(Xtrain,Xtrain,Lab_Xtrain,'bgr',[],[],'on','hist',nom_caract,nom_caract);
-zoom on
-
-%% Empirical Comulative Distribution Function
-for i_feat=1:d
-    figure
-    ecdf(Xtrain_san(:,i_feat))
-    hold on
-    ecdf(Xtrain_enf(:,i_feat))
-    title([nom_caract{i_feat}])
-    legend('sano','enfermo');
-end
-
 %% PLOTNORM
 figure('name', 'Sanos')
 for i_feat=1:d
@@ -102,4 +88,20 @@ for i_feat=1:d
     i_feat
     [H_san,p_value] = chi2gof(Xtrain_san(:,i_feat),'Alpha',0.05)
     [H_enf,p_value] = chi2gof(Xtrain_enf(:,i_feat),'Alpha',0.05)
+end
+
+%% SCATTER PLOT
+figure('name','Scatter Plot')
+gplotmatrix(Xtrain,Xtrain,Lab_Xtrain,'bgr',[],[],'on','hist',...
+            nom_caract,nom_caract);
+zoom on
+
+%% Empirical Comulative Distribution Function
+for i_feat=1:d
+    figure
+    ecdf(Xtrain_san(:,i_feat))
+    hold on
+    ecdf(Xtrain_enf(:,i_feat))
+    title([nom_caract{i_feat}])
+    legend('sano','enfermo');
 end
