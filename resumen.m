@@ -1,5 +1,8 @@
-function [accuracy,f1_score] = resumen(labels,pred, quiet=1)
+function [accuracy,f1_score] = resumen(labels,pred, quiet)
 %resumen resultados prediccion para clasificador binario
+    if nargin == 2
+        quiet = 1;
+    end
     accuracy = sum(labels==pred) / length(labels);
     C = confusionmat(labels,pred);
     precision = C(2,2) / sum(C(:,2));
