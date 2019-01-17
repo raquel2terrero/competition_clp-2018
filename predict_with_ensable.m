@@ -1,4 +1,4 @@
-function [pred] = predict_with_ensable(Mdl_ens,X)
+function [pred] = predict_with_ensemble(Mdl_ens,X)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
     pred = 0;
